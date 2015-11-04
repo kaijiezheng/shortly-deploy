@@ -3,12 +3,18 @@ module.exports = function(grunt) {
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
     concat: {
+      options: {
+        separator: ';'
+      },
       dist: {
         src: [
-          'app/**/*.js',
-          'lib/**/*.js',
+          'public/lib/underscore.js',
+          'public/lib/jquery.js',
+          'public/lib/backbone.js',
+          'public/lib/handlebars.js',
           'public/client/**/*.js',
-          'public/lib/**/*.js',
+          'lib/**/*.js',
+          'app/**/*.js',
           'test/**/*.js'
         ],
         dest: 'public/dist/production.js',
@@ -64,7 +70,7 @@ module.exports = function(grunt) {
       scripts: {
         files: [
           'public/client/**/*.js',
-          'public/lib/**/*.js',
+          'public/lib/**/*.js'
         ],
         tasks: [
           'concat',
@@ -119,6 +125,7 @@ module.exports = function(grunt) {
   grunt.registerTask('upload', function(n) {
     if(grunt.option('prod')) {
       // add your production server task here
+      grunt.task.run([ 'deploy' ]);
     } else {
       grunt.task.run([ 'server-dev' ]);
     }
@@ -126,6 +133,9 @@ module.exports = function(grunt) {
 
   grunt.registerTask('deploy', [
       // add your production server task here
-      ['concat', 'uglify', 'jshint', 'mocha']
+      'concat',
+      'uglify',
+      'jshint',
+      'mochaTest'
   ]);
 };
