@@ -1,5 +1,10 @@
+window.Templates = {};
+$('[type="text/x-handlebars-template"]').each(function(index, div){
+  Templates[div.id] = Handlebars.compile(div.innerHTML);
+});
+
 window.Shortly = Backbone.View.extend({
-  template: Templates.layout,
+  template: window.Templates.layout,
 
   events: {
     'click li a.index':  'renderIndexView',
