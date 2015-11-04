@@ -5,11 +5,11 @@ module.exports = function(grunt) {
     concat: {
       dist: {
         src: [
-          'app/*.js',
-          'lib/*.js',
-          'public/client/*.js',
-          'public/lib/*.js',
-          'test/*.js'
+          'app/**/*.js',
+          'lib/**/*.js',
+          'public/client/**/*.js',
+          'public/lib/**/*.js',
+          'test/**/*.js'
         ],
         dest: 'public/dist/production.js',
       },
@@ -40,6 +40,9 @@ module.exports = function(grunt) {
     jshint: {
       files: [
         // Add filespec list here
+        'Gruntfile.js',
+        'public/client/**/*.js',
+        'public/lib/**/*.js',
       ],
       options: {
         force: 'true',
@@ -52,7 +55,9 @@ module.exports = function(grunt) {
     },
 
     cssmin: {
-        // Add filespec list here
+      // Add filespec list here
+      src: 'public/style.css',
+      dest: 'public/dist/style.css'
     },
 
     watch: {
@@ -121,8 +126,6 @@ module.exports = function(grunt) {
 
   grunt.registerTask('deploy', [
       // add your production server task here
-      ['concat', 'uglify']
+      ['concat', 'uglify', 'jshint', 'mocha']
   ]);
-
-
 };
