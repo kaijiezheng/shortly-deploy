@@ -57,7 +57,7 @@ module.exports = function(grunt) {
     cssmin: {
       // Add filespec list here
       src: 'public/style.css',
-      dest: 'public/dist/style.css'
+      dest: 'public/dist/style.min.css'
     },
 
     watch: {
