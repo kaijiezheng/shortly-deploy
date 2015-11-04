@@ -3,6 +3,16 @@ module.exports = function(grunt) {
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
     concat: {
+      dist: {
+        src: [
+          'app/*.js',
+          'lib/*.js',
+          'public/client/*.js',
+          'public/lib/*.js',
+          'test/*.js'
+        ],
+        dest: 'public/dist/production.js',
+      },
     },
 
     mochaTest: {
@@ -21,6 +31,10 @@ module.exports = function(grunt) {
     },
 
     uglify: {
+      build: {
+        src: 'public/dist/production.js',
+        dest: 'public/dist/production.min.js'
+      }
     },
 
     jshint: {
@@ -107,6 +121,7 @@ module.exports = function(grunt) {
 
   grunt.registerTask('deploy', [
       // add your production server task here
+      ['concat', 'uglify']
   ]);
 
 
