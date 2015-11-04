@@ -1,9 +1,14 @@
 <% include partials/backbone_templates %>
 
 <script>
-  $(function(){
-    new Shortly();
+  $('[type="text/x-handlebars-template"]').each(function(index, div){
+    Templates[div.id] = Handlebars.compile(div.innerHTML);
   });
 </script>
 
 <script src='/dist/production.js'></script>
+<script>
+  $(function(){
+    var myShortly = new Shortly();
+  });
+</script>
